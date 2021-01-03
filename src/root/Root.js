@@ -10,8 +10,6 @@ import Contact from "../pages/Contact/Contact";
 import SingleProduct from "../components/SingleProduct/SingleProduct";
 
 const Root = () => {
-  // set local storage
-
   const getCartFromLocalStorage = () => {
     let localStorageCart;
     if (localStorage.getItem("cart")) {
@@ -32,15 +30,12 @@ const Root = () => {
     return localStorageCartCounter;
   };
 
-  // starting states
   const [products, setProducts] = useState([]);
   const [singleProduct, setSingleProduct] = useState("");
 
-  // slogan interval states
   const [welcomeSlogan, setWelcomeSlogan] = useState("");
   const [indexTimeout, setIndexTimeout] = useState(0);
 
-  // cart states
   const [cart, setCart] = useState(getCartFromLocalStorage());
   const [cartCounter, setCartCounter] = useState(
     getCartCounterFromLocalStorage()
@@ -49,7 +44,6 @@ const Root = () => {
   const [total, setTotal] = useState(0);
   const [shortCart, setShortCart] = useState([]);
 
-  // filter states
   const [filterVisibility, setFilterVisibility] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
@@ -58,8 +52,6 @@ const Root = () => {
   const [freeDelivery, setFreeDelivery] = useState(false);
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
-
-  // get data from cms
 
   useEffect(() => {
     client
@@ -73,10 +65,8 @@ const Root = () => {
         setProducts([...cmsList]);
         setFilteredProducts([...cmsList]);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   }, []);
-
-  // starting functions
 
   const seeSingleProduct = (productName) => {
     const chosenProduct = products.filter(
@@ -84,8 +74,6 @@ const Root = () => {
     );
     setSingleProduct(chosenProduct);
   };
-
-  // local storage functions
 
   const setCartToLocalStorage = () => {
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -99,8 +87,6 @@ const Root = () => {
     setCartToLocalStorage();
     setCartCounterToLocalStorage();
   }, [cart, cartCounter]);
-
-  // slogan Interval functions
 
   const WelcomeSloganInterval = () => {
     let beginSlogan = "";
@@ -150,8 +136,6 @@ const Root = () => {
     clearTimeout(indexTimeout + 1);
     setWelcomeSlogan("welcome to our store");
   };
-
-  // cart functions
 
   useEffect(() => {
     if (cart.length < 8) {
@@ -253,8 +237,6 @@ const Root = () => {
     setTotal(0);
     setShortCart([]);
   };
-
-  // filter functions
 
   const getMaxPrice = () => {
     const maxNumber = Math.max(

@@ -1,9 +1,0 @@
-react-router-dom
-styled-components
-@material-ui/core
-react-awesome-slider
-google-map-react
-formik
-yup
-cms/contentful
-react-paypal-express-checkout
